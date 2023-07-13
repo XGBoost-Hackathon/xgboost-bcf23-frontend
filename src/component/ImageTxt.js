@@ -4,7 +4,7 @@ import UilImageQuestion from '@iconscout/react-unicons/icons/uil-image-question'
 import axios from 'axios';
 import { useState } from 'react';
 
-function ImageText() {
+function ImageText({setIsLoading, setMessagetoSend}) {
     // const [file, setFile] = useState("");
 
     // const handleFileChange = (e) => {
@@ -14,15 +14,20 @@ function ImageText() {
 
     async function handleFileUpload (e) {
         // if (file) {
-            const formData = 'hello'
-        //   const formData = new FormData();
-        //   formData.append('file', e.target.files[0]);
+            // const formData = 'hello'
+          const formData = new FormData();
+          formData.append('file', e.target.files[0]);
           console.log('trying...');
           try {
-            const response = await axios.post('http://localhost:8001/uploadtogpt/', formData);
+            setIsLoading(true);
+            // const response = await axios.post('http://localhost:8001/uploadtogpt/', formData);
+            const response = await axios.post('http://localhost:8000/uploadtogpt/', formData);
             console.log('uploaded');
             // console.log(response.data.downloadUrl);
             // return response.data.downloadUrl;
+            console.log(response.data.recognizedText);
+            setIsLoading(false)
+            setMessagetoSend(response.data.recognizedText)
           } catch (error) {
             console.error(error); // Handle any errors
           }

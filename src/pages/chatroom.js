@@ -11,6 +11,7 @@ import VoiceRecorder from '../component/VoiceRecorder';
 import TextToSpeech from '../component/TextToSpeech';
 import UilMicrophone from '@iconscout/react-unicons/icons/uil-microphone';
 import ImageText from '../component/ImageTxt';
+import Loading from '../component/Loading';
 
 function Chatroom({socketRef}) {
   const { otherperson } = useParams();
@@ -19,6 +20,7 @@ function Chatroom({socketRef}) {
   const [messagetoSend, setMessagetoSend] = useState("");
   const [file, setFile] = useState("");
   const [isRecording, setIsRecording] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
       socketRef.current?.on('sent_to_me_message', (data) => {
@@ -107,9 +109,10 @@ async function handleFileUpload () {
             {file && <div className='filenameviewer'>
                     {file.name} <UilUpload style={{verticalAlign:'middle'}}/>
             </div>}
+            <div className='filenameviewer'><Loading isLoading={isLoading}/></div>
             <div className="input-container">
                 <FileHandler setFile={setFile}/>
-                {otherperson==='gpt' && <ImageText/>}
+                <ImageText setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/>
                 <VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/>
                 <textarea
                     className='messagetoSendInput'
