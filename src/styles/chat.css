@@ -23,7 +23,10 @@
     height: 70vh;
     
   }
-  
+
+  .yellow {
+    border:'5px solid black'
+  }
   .message {
     width: 80%;
     margin-bottom: 10px;

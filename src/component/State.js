@@ -6,7 +6,7 @@ function State({ state, fillState, onDelete }) {
     <div className='state'>
       <div className="user-info" onClick={()=>fillState(state)}>
         <span className="username">{state.username}</span>
-        <small className="address">http://{state.ipv4}:{state.port}</small>
+        <small className="address">{state.address}</small>
       </div>
       <button className="delete-button" onClick={()=>onDelete(state)}>
         

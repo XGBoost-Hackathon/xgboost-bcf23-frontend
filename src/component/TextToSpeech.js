@@ -23,7 +23,7 @@ const TextToSpeech = ({text}) => {
 
   return (
     <div>
-    <UilMicrophone onClick={handleSpeak}/>
+    <UilMicrophone size={20} onClick={handleSpeak}/>
       {/* <textarea
         value={text}
         onChange={handleInputChange}

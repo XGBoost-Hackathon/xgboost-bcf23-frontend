@@ -12,6 +12,7 @@ import TextToSpeech from '../component/TextToSpeech';
 import UilMicrophone from '@iconscout/react-unicons/icons/uil-microphone';
 import ImageText from '../component/ImageTxt';
 import Loading from '../component/Loading';
+import Export from '../component/Export';
 
 function Chatroom({socketRef}) {
   const { otherperson } = useParams();
@@ -95,25 +96,29 @@ async function handleFileUpload () {
                         {message.filename &&
                             <div>
                                 <span>{message.filename}</span>
-                                <span style={{cursor:'pointer'}} onClick={() => handleDownload(message.downloadUrl, message.filename)}><UilFileDownloadAlt size={20}/></span>
+                                <span title="Download this file" style={{cursor:'pointer'}} onClick={() => handleDownload(message.downloadUrl, message.filename)}><UilFileDownloadAlt size={20}/></span>
                             </div>
                         }
                     </div>
-                        <div className="custom-file-upload"><TextToSpeech text={message.message}/></div>
+                      <div style={{display:'flex',flexDirection:'column'}}>
+                        {!message.filename && <div title="Read Aloud!" className="custom-file-upload"><TextToSpeech text={message.message}/></div>}
+                        {/* {message.username==='Megh' && <div className="custom-file-upload"><Export/></div>} */}
+                        <div className="custom-file-upload"><Export/></div>
+                      </div>
                         </div>
                 ))}
             </div>
             {isRecording && <div className='filenameviewer'>
-                    Recording in Progress... <UilMicrophone size={15} style={{verticalAlign:'middle'}}/>
+              <small>Recording in Progress...</small> <UilMicrophone size={15} style={{verticalAlign:'middle'}}/>
             </div>}
             {file && <div className='filenameviewer'>
-                    {file.name} <UilUpload style={{verticalAlign:'middle'}}/>
+                    <small>{file.name}</small> <UilUpload size={15} style={{verticalAlign:'middle'}}/>
             </div>}
             <div className='filenameviewer'><Loading isLoading={isLoading}/></div>
             <div className="input-container">
-                <FileHandler setFile={setFile}/>
-                <ImageText setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/>
-                <VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/>
+            <div title="Share a file!"><FileHandler setFile={setFile}/></div>
+            <div title="Share a file!"><ImageText setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/></div>
+            <div title="Share a file!"><VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/></div>
                 <textarea
                     className='messagetoSendInput'
                     type='text'

@@ -9,12 +9,23 @@ import UilFileDownloadAlt from '@iconscout/react-unicons/icons/uil-file-download
 import TextToSpeech from '../component/TextToSpeech';
 import UilMicrophone from '@iconscout/react-unicons/icons/uil-microphone';
 import VoiceRecorder from '../component/VoiceRecorder';
+import ImageText from '../component/ImageTxt';
+import Search from '../component/Search';
 
 function Chatdorm({ socketRef }) {
     const [messages, setMessages] = useState([]);
     const [messagetoSend, setMessagetoSend] = useState("");
     const [file, setFile] = useState("");
     const [isRecording, setIsRecording] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [search, setSearch] = useState('g');
+
+    useEffect(()=>{
+        messages.find(message=>{
+
+        })
+    },[search])
 
     useEffect(() => {
         const fetchSessionMessages = async () => {
@@ -100,6 +111,15 @@ function Chatdorm({ socketRef }) {
         }
     };
 
+    function searchMsg(message){
+        if(search==='') return ''
+        if(message.message?.includes(search))
+            return 'purple';
+        else if(message.filename?.includes(search))
+            return 'green'
+        else return ''
+    }
+
     if(!socketRef.current?.connected) return <LoginFirst/>
     else return (
         <div className='chatdorm'>
@@ -108,29 +128,34 @@ function Chatdorm({ socketRef }) {
             <div className="chat-container">
                 {messages.map((message) => (
                   <div style={{display:'flex',flexDirection:'row'}}>
-                    <div key={message.id} className={message.username===socketRef.username?"self-message":"message"}>
+                    <div key={message.id} style={{backgroundColor:searchMsg(message)}} className={message.username===socketRef.username?"self-message":"message"}>
                         <span className="timestamp"><b>{message.username}</b> {message.timestamp}</span><br/>
                         <small style={{ whiteSpace: 'pre-line' }}>{message.message}</small>
                         {message.filename &&
                             <div>
                                 <span>{message.filename}</span>
-                                <span style={{cursor:'pointer'}} onClick={() => handleDownload(message.downloadUrl, message.filename)}><UilFileDownloadAlt size={20}/></span>
+                                <span title="Download this file" style={{cursor:'pointer'}} onClick={() => handleDownload(message.downloadUrl, message.filename)}><UilFileDownloadAlt size={20}/></span>
                             </div>
                         }
                     </div>
-                        {!message.filename && <div className="custom-file-upload"><TextToSpeech text={message.message}/></div>}
+                        {!message.filename && <div title="Read Aloud!" className="custom-file-upload"><TextToSpeech text={message.message}/></div>}
                   </div>
                 ))}
             </div>
             {isRecording && <div className='filenameviewer'>
-                    Recording in Progress... <UilMicrophone size={15} style={{verticalAlign:'middle'}}/>
+                    <small>Recording in Progress...</small> <UilMicrophone size={15} style={{verticalAlign:'middle'}}/>
             </div>}
             {file && <div className='filenameviewer'>
                     {file.name} <UilUpload style={{verticalAlign:'middle'}}/>
             </div>}
+            {isSearching && <div className='filenameviewer'>
+                    <input placeholder='Search here...' value={search} onChange={(e)=>setSearch(e.target.value)}></input>
+            </div>}
             <div className="input-container">
-                <FileHandler setFile={setFile}/>
-                <VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/>
+                <div title="Share a file!"><FileHandler setFile={setFile}/></div>
+                <div title="Give voice input!"><VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/></div>
+                <div title="Attach image/txt file to auto fill!"><ImageText setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/></div>
+                <div title="Search messages and files!"><Search isSearching={isSearching} setIsSearching={setIsSearching}/></div>
                 <textarea
                     className='messagetoSendInput'
                     type='text'

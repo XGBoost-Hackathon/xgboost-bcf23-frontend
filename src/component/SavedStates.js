@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import State from './State';
 
-function SavedStates({ setIpv4, setPort, setUsername }) {
+function SavedStates({ setAddress, setUsername }) {
 
   const [states, setStates] = useState([]);
     
@@ -15,8 +15,8 @@ function SavedStates({ setIpv4, setPort, setUsername }) {
   }, []);
 
   const fillState = (state) => {
-    setIpv4(state.ipv4);
-    setPort(state.port);
+    setAddress(state.address);
+    // setPort(state.port);
     setUsername(state.username);
   }
 

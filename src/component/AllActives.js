@@ -44,7 +44,7 @@ function AllActives({ socketRef }) {
       <div style={{height:'30px'}}></div>
       <div className='state'>
         <div className="user-info" onClick={()=>gotoRoom('gpt')}>
-          <span className="username">Friend GPT</span>
+          <span className="username">Megh GPT</span>
         </div>
       </div>
       <div className='state'>
