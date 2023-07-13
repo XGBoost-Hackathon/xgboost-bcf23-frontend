@@ -1,0 +1,19 @@
+.Input {
+    margin-bottom: 10px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+}
+
+.Input-label {
+    font-weight: 400;
+    margin-right: auto;
+}
+
+.Input-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: 13px;
+    margin-left: auto;
+}

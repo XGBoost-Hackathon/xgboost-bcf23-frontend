@@ -1,0 +1,16 @@
+.custom-file-upload {
+    padding-right: 10px;
+    color: rgb(100, 100, 100);
+  }
+
+.custom-file-upload:hover{
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+  
+  /* Optional: Style the label to indicate when a file is selected
+  .custom-file-upload:after {
+    content: 'File selected';
+    margin-left: 10px;
+  } */
+  

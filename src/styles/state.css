@@ -1,0 +1,39 @@
+.state {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-bottom: 10px;
+  }
+  .state:hover {
+    cursor: pointer;
+    border: 1px solid rgb(100, 100, 100);
+  }
+  
+  .username {
+    font-weight: 400;
+    margin-right: 10px;
+    width: max-content;
+  }
+  
+  .delete-button {
+    background-color: #ff0000;
+    color: #fff;
+    border: 7px solid white;
+    padding: 2.5px 7px;
+    border-radius: 2px;
+    transition: 0.5s ease;
+  }
+  .delete-button:hover {
+    background-color: #ff0000;
+    color: #fff;
+    border: 7px solid white;
+    padding: 3px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  
