@@ -118,8 +118,8 @@ function Chatdorm({ socketRef }) {
                             </div>
                         }
                     </div>
-                        <div className="custom-file-upload"><TextToSpeech text={message.message}/></div>
-                        </div>
+                        {!message.filename && <div className="custom-file-upload"><TextToSpeech text={message.message}/></div>}
+                  </div>
                 ))}
             </div>
             {isRecording && <div className='filenameviewer'>

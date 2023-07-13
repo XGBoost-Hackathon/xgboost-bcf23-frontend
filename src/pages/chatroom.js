@@ -10,6 +10,7 @@ import UilFileDownloadAlt from '@iconscout/react-unicons/icons/uil-file-download
 import VoiceRecorder from '../component/VoiceRecorder';
 import TextToSpeech from '../component/TextToSpeech';
 import UilMicrophone from '@iconscout/react-unicons/icons/uil-microphone';
+import ImageText from '../component/ImageTxt';
 
 function Chatroom({socketRef}) {
   const { otherperson } = useParams();
@@ -108,6 +109,7 @@ async function handleFileUpload () {
             </div>}
             <div className="input-container">
                 <FileHandler setFile={setFile}/>
+                {otherperson==='gpt' && <ImageText/>}
                 <VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/>
                 <textarea
                     className='messagetoSendInput'
