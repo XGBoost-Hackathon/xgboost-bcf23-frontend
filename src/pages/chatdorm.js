@@ -19,7 +19,7 @@ function Chatdorm({ socketRef }) {
     const [isRecording, setIsRecording] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-    const [search, setSearch] = useState('g');
+    const [search, setSearch] = useState('');
 
     useEffect(()=>{
         messages.find(message=>{
@@ -154,7 +154,7 @@ function Chatdorm({ socketRef }) {
             <div className="input-container">
                 <div title="Share a file!"><FileHandler setFile={setFile}/></div>
                 <div title="Give voice input!"><VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/></div>
-                <div title="Attach image/txt file to auto fill!"><ImageText setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/></div>
+                <div title="Attach image/txt file to auto fill!"><ImageText address={socketRef.current?.address} setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/></div>
                 <div title="Search messages and files!"><Search isSearching={isSearching} setIsSearching={setIsSearching}/></div>
                 <textarea
                     className='messagetoSendInput'

@@ -117,7 +117,7 @@ async function handleFileUpload () {
             <div className='filenameviewer'><Loading isLoading={isLoading}/></div>
             <div className="input-container">
             <div title="Share a file!"><FileHandler setFile={setFile}/></div>
-            <div title="Share a file!"><ImageText setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/></div>
+            <div title="Share a file!"><ImageText address={socketRef.current?.address} setIsLoading={setIsLoading} setMessagetoSend={setMessagetoSend}/></div>
             <div title="Share a file!"><VoiceRecorder isRecording={isRecording} setIsRecording={setIsRecording} setMessagetoSend={setMessagetoSend}/></div>
                 <textarea
                     className='messagetoSendInput'
